@@ -1,5 +1,4 @@
 let wordX;
-// let wordSpeed;
 
 let honey;
 
@@ -9,9 +8,18 @@ let sour = ["lemon", "lime", "vinegar", "pickle", "kimchi"];
 let veggie = ["carrot", "broccoli", "spinach", "lettuce", "zucchini"];
 let meat = ["chicken", "beef", "pork", "lamb", "duck"];
 
+let ingredientGroups = [
+  { category: "sweet", words: sweet },
+  { category: "spicy", words: spicy },
+  { category: "sour", words: sour },
+  { category: "veggie", words: veggie },
+  { category: "meat", words: meat }
+];
+
 let ingredients = [];
 
 let randomWord;
+let randomCategory;
 
 //---------------------------------------------------------------------------------//
 
@@ -22,19 +30,6 @@ function setup() {
   rectMode(CENTER);
 
   wordX = random(100, width-100);
-  // wordSpeed = random(0.4, 1.2);
-
-  // honey = new IngredientWord("honey", "sweet", random(100, width-100), 100, 10);
-  // ingredients.push(honey);
-  // chilli = new IngredientWord("chilli", "spicy", random(100, width-100), 100, 10);
-  // ingredients.push(chilli);
-  // lemon = new IngredientWord("lemon", "sour", random(100, width-100), 100, 10);
-  // ingredients.push(lemon);
-
-  randomWord = new IngredientWord(random(sweet), "sweet", random(100, width-100), 100, 10);
-  ingredients.push(randomWord);
-
-  randomWord = random(sweet);
 }
 
 //---------------------------------------------------------------------------------//
@@ -42,10 +37,22 @@ function setup() {
 function draw() {
   background(255);
 
+  if (frameCount % 60 === 0) {
+    spawnIngredient();
+  }
+
   for (let ingredient of ingredients) {
   ingredient.update();
   ingredient.display();
+
 }
+}
+
+
+function spawnIngredient() {
+  randomCategory = random(ingredientGroups);
+  randomWord = new IngredientWord(random(randomCategory.words),randomCategory.category,random(100, width - 100), 100, random(0.5, 1.5));
+  ingredients.push(randomWord);
 }
 
 //---------------------------------------------------------------------------------//
