@@ -1,8 +1,17 @@
-let honeyX;
-let honeyY = 100;
-// let honeySpeed;
+let wordX;
+// let wordSpeed;
 
 let honey;
+
+let sweet = ["honey", "sugar", "candy", "syrup", "molasses"];
+let spicy = ["chilli", "pepper", "wasabi", "jalapeno", "sambal"];
+let sour = ["lemon", "lime", "vinegar", "pickle", "kimchi"];
+let veggie = ["carrot", "broccoli", "spinach", "lettuce", "zucchini"];
+let meat = ["chicken", "beef", "pork", "lamb", "duck"];
+
+let ingredients = [];
+
+let randomWord;
 
 //---------------------------------------------------------------------------------//
 
@@ -12,10 +21,20 @@ function setup() {
   createCanvas((10/7) * windowHeight, windowHeight);
   rectMode(CENTER);
 
-  honeyX = random(100, width-100);
-  // honeySpeed = random(0.4, 1.2);
+  wordX = random(100, width-100);
+  // wordSpeed = random(0.4, 1.2);
 
-  honey = new IngredientWord("honey", "sweet", honeyX, 100, 10);
+  // honey = new IngredientWord("honey", "sweet", random(100, width-100), 100, 10);
+  // ingredients.push(honey);
+  // chilli = new IngredientWord("chilli", "spicy", random(100, width-100), 100, 10);
+  // ingredients.push(chilli);
+  // lemon = new IngredientWord("lemon", "sour", random(100, width-100), 100, 10);
+  // ingredients.push(lemon);
+
+  randomWord = new IngredientWord(random(sweet), "sweet", random(100, width-100), 100, 10);
+  ingredients.push(randomWord);
+
+  randomWord = random(sweet);
 }
 
 //---------------------------------------------------------------------------------//
@@ -23,18 +42,10 @@ function setup() {
 function draw() {
   background(255);
 
-  if (honeyY > height-300) {
-    honeyY = 100;
-    honeyX = random(100, width-100);
-  }
-
-  fill(255, 204, 0);
-  textSize(32);
-  text("honey", honeyX, honeyY);
-  honeyY += 10;
-
-  honey.update();
-  honey.display();
+  for (let ingredient of ingredients) {
+  ingredient.update();
+  ingredient.display();
+}
 }
 
 //---------------------------------------------------------------------------------//
