@@ -164,6 +164,7 @@ function keyTyped() {
   }
 }
 
+
 function keyPressed(event) {
 
   if (event.key === "Backspace") {
@@ -176,10 +177,9 @@ function keyPressed(event) {
     let matchedIngredient = null;
 
     for (let i = ingredients.length - 1; i >= 0; i--) {
+
       if (ingredients[i].word === typedWord) {
-
         matchedIngredient = ingredients[i];
-
         ingredients.splice(i, 1);
         break;
       }
@@ -188,9 +188,14 @@ function keyPressed(event) {
     if (matchedIngredient !== null) {
 
       let isCorrectCategory = false;
-      
+
       for (let req of currentCustomer.order.requirements) {
-        if (matchedIngredient.category === req.category) {
+
+        if (
+          matchedIngredient.category === req.category &&
+          currentCustomer.progress[req.category] < req.count
+        ) {
+
           currentCustomer.progress[req.category]++;
           isCorrectCategory = true;
           break;
@@ -201,18 +206,29 @@ function keyPressed(event) {
         currentCustomer.timeLeft -= 5;
       }
 
-      if (
-      matchedIngredient.category === req.category &&
-      currentCustomer.progress[req.category] < req.count
-      )
-      
-      console.log(matchedIngredient);
+      if (isCorrectCategory === true) {
+        let isOrderComplete = true;
 
-      typedWord = "";
-      return false;
+        for (let req of currentCustomer.order.requirements) {
+          if (currentCustomer.progress[req.category] < req.count) {
+            isOrderComplete = false;
+            break;
+          }
+        }
+
+        if (isOrderComplete === true) {
+          console.log("주문 완료!");
+        }
+      }
     }
+    
+    typedWord = "";
+
+    return false;
+    
   }
 }
+
 
 //customer order and timer mechanics
 
