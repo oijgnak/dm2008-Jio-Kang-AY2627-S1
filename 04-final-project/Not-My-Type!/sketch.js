@@ -19,9 +19,21 @@ let typedWord = "";
 let orderTemplates = {
   morning: [
     {
-      message: "달콤한 거 두 개 주세요!",
+      message: "단거 하나",
       requirements: [
-        { category: "sweet", count: 2 }
+        { category: "sweet", count: 1 }
+      ]
+    }
+    ,{
+      message: "신거 하나",
+      requirements: [
+        { category: "sour", count: 1 }
+      ]
+    }
+    ,{
+      message: "매운거 하나",
+      requirements: [
+        { category: "spicy", count: 1 }
       ]
     }
   ],
@@ -57,6 +69,12 @@ let orderTemplates = {
 };
 
 let currentCustomer;
+
+let reputation = 0;
+
+let customerServed = false;
+let customerServedAt = 0;
+
 
 //---------------------------------------------------------------------------------//
 
@@ -94,40 +112,56 @@ function draw() {
     }
   }
   
-
+//display typed word
   fill(0);
   textSize(14);
   text("" + typedWord, width/2, height - 100);
 
+//customer lines when served
+  if (customerServed === true) {
+    fill(0);
+    textAlign(CENTER);
+    textSize(24);
+    text("고마워요!", width / 2, 350);
+  } else {
+    // display customer order
+      //Got help from chatGPT for this part, but I made sure what each line of code does and how it works.
 
-  // display customer order
-    //Got help from chatGPT for this part, but I made sure what each line of code does and how it works.
+      fill(0);
+      textAlign(CENTER);
 
-  fill(0);
-  textAlign(CENTER);
+      textSize(24);
+      text(currentCustomer.order.message, width / 2, 350);
 
-  textSize(24);
-  text(currentCustomer.order.message, width / 2, 350);
+      textSize(20);
 
-  textSize(20);
+      let progressY = 390;
 
-  let progressY = 390;
+      for (let req of currentCustomer.order.requirements) {
 
-  for (let req of currentCustomer.order.requirements) {
+        let category = req.category;
+        let currentCount = currentCustomer.progress[category];
 
-    let category = req.category;
-    let currentCount = currentCustomer.progress[category];
+        text(
+          category + ": " + currentCount + " / " + req.count,
+          width / 2,
+          progressY
+        );
 
-    text(
-      category + ": " + currentCount + " / " + req.count,
-      width / 2,
-      progressY
-    );
+        progressY += 30;
+      }
 
-    progressY += 30;
+      textAlign(LEFT);
   }
+  if (customerServed === true && millis() - customerServedAt > 1500) {
+    let selectOrder = random(orderTemplates.morning);
+    currentCustomer = new Customer(selectOrder);
 
-  textAlign(LEFT);
+    customerServed = false;
+    customerServedAt = 0;
+
+    typedWord = "";
+  }
 }
 
 function spawnIngredient() {
@@ -160,6 +194,9 @@ function spawnIngredient() {
 //chatGPT helped me with this part(keyTyped), but I made sure what each line of code does.
 function keyTyped() {
   if (key.length === 1 && /^[a-z]$/i.test(key)) {
+    if (customerServed === true) {
+      return;
+    }
     typedWord += key.toLowerCase();
   }
 }
@@ -217,7 +254,13 @@ function keyPressed(event) {
         }
 
         if (isOrderComplete === true) {
+          reputation++;
+
+          customerServed = true;
+          customerServedAt = millis();
+
           console.log("주문 완료!");
+          console.log("평판: " + reputation);
         }
       }
     }
