@@ -1,7 +1,3 @@
-let wordX;
-
-let honey;
-
 let sweet = ["honey", "sugar", "candy", "syrup", "molasses"];
 let spicy = ["chilli", "pepper", "wasabi", "jalapeno", "sambal"];
 let sour = ["lemon", "lime", "vinegar", "pickle", "kimchi"];
@@ -17,10 +13,6 @@ let ingredientGroups = [
 ];
 
 let ingredients = [];
-
-let randomWord;
-let randomCategory;
-
 
 let typedWord = "";
 
@@ -64,15 +56,21 @@ let orderTemplates = {
   ]
 };
 
+let currentCustomer;
+
 //---------------------------------------------------------------------------------//
 
 function setup() {
   // If you want a canvas that fills the window
   // use createCanvas(windowWidth, windowHeight)
-  createCanvas((10/7) * windowHeight, windowHeight);
+  createCanvas(960,600);
   rectMode(CENTER);
 
-  wordX = random(100, width-100);
+  let selectOrder = random(orderTemplates.morning);
+  currentCustomer = new Customer(selectOrder);
+
+  console.log(currentCustomer);
+  console.log(currentCustomer.progress);
 }
 
 //---------------------------------------------------------------------------------//
@@ -98,11 +96,38 @@ function draw() {
   
 
   fill(0);
-  textSize(28);
+  textSize(14);
   text("" + typedWord, width/2, height - 100);
 
   //customer order and timer mechanics
-  
+  // display customer order
+
+  fill(0);
+  textAlign(CENTER);
+
+  textSize(24);
+  text(currentCustomer.order.message, width / 2, 350);
+
+  textSize(20);
+
+  let progressY = 390;
+
+  for (let req of currentCustomer.order.requirements) {
+
+    let category = req.category;
+    let currentCount = currentCustomer.progress[category];
+
+    text(
+      category + ": " + currentCount + " / " + req.count,
+      width / 2,
+      progressY
+    );
+
+    progressY += 30;
+  }
+
+  textAlign(LEFT);
+  //Got help from chatGPT to write code for tracking the progress of the order
 }
 
 function keyTyped() {
@@ -135,6 +160,7 @@ function keyPressed(event) {
 //customer order and timer mechanics
 
 
+
 //---------------------------------------------------------------------------------//
 
 //falling ingredients and typing mechanics
@@ -153,7 +179,7 @@ class IngredientWord {
 
   display() {
     fill(255, 204, 0);
-    textSize(32);
+    textSize(20);
     text(this.word, this.x, this.y);
   }
 }
@@ -179,7 +205,7 @@ function spawnIngredient() {
     randomCategory.category,
     random(100, width - 100),
     100,
-    random(0.5, 1.5)
+    random(0.5, 1.0)
   );
 
   ingredients.push(randomWord);
@@ -190,6 +216,9 @@ class Customer {
   constructor(order) {
     this.order = order;
     this.progress = {};
+    for (let req of order.requirements) {
+      this.progress[req.category] = 0;
+    }
     this.timeLeft = 20;
     this.spriteId = floor(random(3));
     this.isSpecial = false;
