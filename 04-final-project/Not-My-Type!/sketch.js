@@ -78,7 +78,8 @@ let customerFailed = false;
 
 let ThankYouMessages = ["고마워요!", "감사합니다!", "잘 먹겠습니다!", "맛있게 먹을게요!"];
 
-let gameTimeLeft = 240;
+let gameElapsedSeconds = 0;
+let gameMinutes = 9 * 60;
 
 
 //---------------------------------------------------------------------------------//
@@ -101,10 +102,16 @@ function setup() {
 function draw() {
   background(255);
 
-  gameTimeLeft -= deltaTime / 1000;
-  if (gameTimeLeft <= 0) {
-    gameTimeLeft = 0;
-  }
+  gameElapsedSeconds += deltaTime / 1000;
+
+  let quarterHoursPassed = floor(gameElapsedSeconds / 5);
+
+  gameMinutes = min(
+    9 * 60 + quarterHoursPassed * 15,
+    21 * 60
+  );
+
+  floor(gameElapsedSeconds / 5);
 
   if (customerServed === false && customerFailed === false) {
     currentCustomer.timeLeft -= deltaTime / 1000;
@@ -121,14 +128,27 @@ function draw() {
     }
   }
 
-  let totalSeconds = ceil(gameTimeLeft);
-  let minutes = floor(totalSeconds / 60);
-  let seconds = totalSeconds % 60;
+  let hour24 = floor(gameMinutes / 60);
+  let minute = gameMinutes % 60;
+
+  let hour12 = hour24 % 12;
+
+  if (hour12 === 0) {
+    hour12 = 12;
+  }
+
+  let period = hour24 >= 12 ? "PM" : "AM";
+
+  let clockText =
+    hour12 + ":" + nf(minute, 2) + " " + period;
 
   textAlign(RIGHT);
   textSize(24);
   fill(0);
-  text(nf(minutes, 2) + ":" + nf(seconds, 2), width - 30, 40);
+
+  text(clockText, width - 40, 50);
+
+  textAlign(LEFT);
 
 //falling ingredients and typing mechanics
   if (frameCount % 30 === 0) {
