@@ -99,8 +99,9 @@ function draw() {
   textSize(14);
   text("" + typedWord, width/2, height - 100);
 
-  //customer order and timer mechanics
+
   // display customer order
+    //Got help from chatGPT for this part, but I made sure what each line of code does and how it works.
 
   fill(0);
   textAlign(CENTER);
@@ -127,9 +128,36 @@ function draw() {
   }
 
   textAlign(LEFT);
-  //Got help from chatGPT to write code for tracking the progress of the order
 }
 
+function spawnIngredient() {
+  let randomCategory = random(ingredientGroups);
+  let selectedWord = random(randomCategory.words);
+
+  let sameWordCount = 0;
+
+  for (let ingredient of ingredients) {
+    if (ingredient.word === selectedWord) {
+      sameWordCount++;
+    }
+  }
+
+  if (sameWordCount >= 2) {
+    return;
+  }
+
+  let randomWord = new IngredientWord(
+    selectedWord,
+    randomCategory.category,
+    random(100, width - 100),
+    100,
+    random(0.5, 1.0)
+  );
+
+  ingredients.push(randomWord);
+}
+
+//chatGPT helped me with this part(keyTyped), but I made sure what each line of code does.
 function keyTyped() {
   if (key.length === 1 && /^[a-z]$/i.test(key)) {
     typedWord += key.toLowerCase();
@@ -145,15 +173,44 @@ function keyPressed(event) {
 
   if (event.key === "Enter") {
 
+    let matchedIngredient = null;
+
     for (let i = ingredients.length - 1; i >= 0; i--) {
       if (ingredients[i].word === typedWord) {
+
+        matchedIngredient = ingredients[i];
+
         ingredients.splice(i, 1);
         break;
       }
     }
 
-    typedWord = "";
-    return false;
+    if (matchedIngredient !== null) {
+
+      let isCorrectCategory = false;
+      
+      for (let req of currentCustomer.order.requirements) {
+        if (matchedIngredient.category === req.category) {
+          currentCustomer.progress[req.category]++;
+          isCorrectCategory = true;
+          break;
+        }
+      }
+
+      if (isCorrectCategory === false) {
+        currentCustomer.timeLeft -= 5;
+      }
+
+      if (
+      matchedIngredient.category === req.category &&
+      currentCustomer.progress[req.category] < req.count
+      )
+      
+      console.log(matchedIngredient);
+
+      typedWord = "";
+      return false;
+    }
   }
 }
 
@@ -182,33 +239,6 @@ class IngredientWord {
     textSize(20);
     text(this.word, this.x, this.y);
   }
-}
-
-function spawnIngredient() {
-  let randomCategory = random(ingredientGroups);
-  let selectedWord = random(randomCategory.words);
-
-  let sameWordCount = 0;
-
-  for (let ingredient of ingredients) {
-    if (ingredient.word === selectedWord) {
-      sameWordCount++;
-    }
-  }
-
-  if (sameWordCount >= 2) {
-    return;
-  }
-
-  let randomWord = new IngredientWord(
-    selectedWord,
-    randomCategory.category,
-    random(100, width - 100),
-    100,
-    random(0.5, 1.0)
-  );
-
-  ingredients.push(randomWord);
 }
 
 //customer order and timer mechanics
