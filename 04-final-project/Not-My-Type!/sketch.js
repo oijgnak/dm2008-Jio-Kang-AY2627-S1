@@ -74,6 +74,11 @@ let reputation = 0;
 
 let customerServed = false;
 let customerServedAt = 0;
+let customerFailed = false;
+
+let ThankYouMessages = ["고마워요!", "감사합니다!", "잘 먹겠습니다!", "맛있게 먹을게요!"];
+
+let gameTimeLeft = 240;
 
 
 //---------------------------------------------------------------------------------//
@@ -96,11 +101,39 @@ function setup() {
 function draw() {
   background(255);
 
+  gameTimeLeft -= deltaTime / 1000;
+  if (gameTimeLeft <= 0) {
+    gameTimeLeft = 0;
+  }
+
+  if (customerServed === false && customerFailed === false) {
+    currentCustomer.timeLeft -= deltaTime / 1000;
+
+    if (currentCustomer.timeLeft <= 0) {
+      currentCustomer.timeLeft = 0;
+      customerFailed = true;
+      customerServedAt = millis();
+
+      reputation--;
+
+      console.log("손님이 화를 내며 떠났습니다");
+      console.log("평판: " + reputation);
+    }
+  }
+
+  let totalSeconds = ceil(gameTimeLeft);
+  let minutes = floor(totalSeconds / 60);
+  let seconds = totalSeconds % 60;
+
+  textAlign(RIGHT);
+  textSize(24);
+  fill(0);
+  text(nf(minutes, 2) + ":" + nf(seconds, 2), width - 30, 40);
+
 //falling ingredients and typing mechanics
   if (frameCount % 30 === 0) {
     spawnIngredient();  
   } 
-
 
   for (let i = ingredients.length - 1; i >= 0; i--) {
 
@@ -122,7 +155,12 @@ function draw() {
     fill(0);
     textAlign(CENTER);
     textSize(24);
-    text("고마워요!", width / 2, 350);
+    text(currentCustomer.thankYouMessage, width / 2, 350);
+  } else if (customerFailed === true) {
+    fill(0);
+    textAlign(CENTER);
+    textSize(24);
+    text("너무 오래 걸리잖아요!", width / 2, 350);
   } else {
     // display customer order
       //Got help from chatGPT for this part, but I made sure what each line of code does and how it works.
@@ -153,15 +191,23 @@ function draw() {
 
       textAlign(LEFT);
   }
-  if (customerServed === true && millis() - customerServedAt > 1500) {
+  if (customerServed === false) {
+  fill(0);
+  textAlign(CENTER);
+  textSize(24);
+  text(currentCustomer.getExpression(), width / 2, 300);
+  }
+  if ((customerServed === true || customerFailed === true) && millis() - customerServedAt > 1500) {
     let selectOrder = random(orderTemplates.morning);
     currentCustomer = new Customer(selectOrder);
 
     customerServed = false;
+    customerFailed = false;
     customerServedAt = 0;
 
     typedWord = "";
   }
+
 }
 
 function spawnIngredient() {
@@ -194,7 +240,7 @@ function spawnIngredient() {
 //chatGPT helped me with this part(keyTyped), but I made sure what each line of code does.
 function keyTyped() {
   if (key.length === 1 && /^[a-z]$/i.test(key)) {
-    if (customerServed === true) {
+    if (customerServed === true || customerFailed === true) {
       return;
     }
     typedWord += key.toLowerCase();
@@ -258,6 +304,7 @@ function keyPressed(event) {
 
           customerServed = true;
           customerServedAt = millis();
+          currentCustomer.thankYouMessage = random(ThankYouMessages);
 
           console.log("주문 완료!");
           console.log("평판: " + reputation);
@@ -311,5 +358,14 @@ class Customer {
     this.timeLeft = 20;
     this.spriteId = floor(random(3));
     this.isSpecial = false;
+  }
+  getExpression() {
+    if (this.timeLeft > 10) {
+      return "happy";
+    } else if (this.timeLeft > 5) {
+      return "neutral";
+    } else {
+      return "angry";
+    }
   }
 }
