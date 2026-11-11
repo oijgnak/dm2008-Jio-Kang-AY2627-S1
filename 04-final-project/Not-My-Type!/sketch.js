@@ -1,6 +1,6 @@
-let sweet = ["honey", "sugar", "candy", "syrup", "molasses"];
-let spicy = ["chilli", "pepper", "wasabi", "jalapeno", "sambal"];
-let sour = ["lemon", "lime", "vinegar", "pickle", "kimchi"];
+let sweet = ["honey", "sugar", "candy", "syrup", "caramel"];
+let spicy = ["chilli", "curry", "wasabi", "sambal", "jalapeno"];
+let sour = ["lemon", "lime", "vinegar", "pickle", "sourkraut"];
 let veggie = ["carrot", "broccoli", "spinach", "lettuce", "zucchini"];
 let meat = ["chicken", "beef", "pork", "lamb", "duck"];
 
@@ -34,6 +34,13 @@ let orderTemplates = {
       message: "매운거 하나",
       requirements: [
         { category: "spicy", count: 1 }
+      ]
+    }
+    ,{
+      message: "단거 하나, 신거 하나",
+      requirements: [
+        { category: "sweet", count: 1 },
+        { category: "sour", count: 1 }
       ]
     }
   ],
@@ -90,8 +97,7 @@ function setup() {
   createCanvas(960,600);
   rectMode(CENTER);
 
-  let selectOrder = random(orderTemplates.morning);
-  currentCustomer = new Customer(selectOrder);
+  spawnCustomer();
 
   console.log(currentCustomer);
   console.log(currentCustomer.progress);
@@ -137,7 +143,7 @@ function draw() {
     hour12 = 12;
   }
 
-  let period = hour24 >= 12 ? "PM" : "AM";
+  let period = hour24 >= 12 ? "AM" : "PM";
 
   let clockText =
     hour12 + ":" + nf(minute, 2) + " " + period;
@@ -160,7 +166,7 @@ function draw() {
   ingredients[i].update();
   ingredients[i].display();
 
-    if (ingredients[i].y > height - 300) {
+    if (ingredients[i].y > height - 200) {
     ingredients.splice(i, 1);
     }
   }
@@ -218,8 +224,7 @@ function draw() {
   text(currentCustomer.getExpression(), width / 2, 300);
   }
   if ((customerServed === true || customerFailed === true) && millis() - customerServedAt > 1500) {
-    let selectOrder = random(orderTemplates.morning);
-    currentCustomer = new Customer(selectOrder);
+    spawnCustomer();
 
     customerServed = false;
     customerFailed = false;
@@ -339,9 +344,26 @@ function keyPressed(event) {
   }
 }
 
+function spawnCustomer() {
 
-//customer order and timer mechanics
+  let availableOrders;
+  let waitTime;
 
+  //morning: 9pm - 12am, lunch: 12am - 4am, evening: 4am - 9am
+  if (gameMinutes < 12 * 60) {
+    availableOrders = orderTemplates.morning;
+    waitTime = 20;
+  } else if (gameMinutes < 16 * 60) {
+    availableOrders = orderTemplates.lunch;
+    waitTime = 25;
+  } else {
+    availableOrders = orderTemplates.evening;
+    waitTime = 30;
+  }
+
+  let selectOrder = random(availableOrders);
+  currentCustomer = new Customer(selectOrder, waitTime);
+}
 
 
 //---------------------------------------------------------------------------------//
@@ -369,20 +391,24 @@ class IngredientWord {
 
 //customer order and timer mechanics
 class Customer {
-  constructor(order) {
+  constructor(order, waitTime) {
     this.order = order;
     this.progress = {};
     for (let req of order.requirements) {
       this.progress[req.category] = 0;
     }
-    this.timeLeft = 20;
+    this.maxTime = waitTime;
+    this.timeLeft = waitTime;
     this.spriteId = floor(random(3));
     this.isSpecial = false;
   }
   getExpression() {
-    if (this.timeLeft > 10) {
+
+    let timeRatio = this.timeLeft / this.maxTime;
+
+    if (timeRatio > 0.5) {
       return "happy";
-    } else if (this.timeLeft > 5) {
+    } else if (timeRatio > 0.3) {
       return "neutral";
     } else {
       return "angry";
