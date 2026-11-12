@@ -41,18 +41,17 @@ The player runs a small digital restaurant, responding to customer orders by typ
      — What were your key visual and/or sonic design decisions, and why?
      — What was your biggest challenge, and how did you work through it?
      — What would you change, add, or explore further given more time? -->
-For my final project, I created "JUST MY TYPE!", a typing game set in a futuristic city where people have become robot-like beings and food can be created and transmitted through computers. I wanted typing to be part of the game's fictional world, rather than just a test of typing speed.
+For my final project, I created *JUST MY TYPE!*, a typing game set in a futuristic city where people have become robot-like beings and food can be created and transmitted through computers. I wanted typing to feel like part of the game's world rather than just a test of speed.
 
-Since this was a coding class, I decided to focus more on programming than character design. I used existing Vocaloid character illustrations as references and drew pixel-art versions of them myself. Although the character designs are not original, I designed and drew all the backgrounds and objects on my own.
+Originally, I planned to design my own characters that would fit the universe. However, due to time constraints, I decided to use existing Vocaloid characters as references and draw pixel-art versions of them myself. All backgrounds and environmental objects were designed and illustrated by me.
 
-I tried to work as independently as possible on the basic gameplay mechanics, especially generating falling words and capturing them through keyboard input. The most difficult part was connecting the captured ingredients to customer orders. I struggled with checking whether an ingredient matched the requested category, updating the order progress, and determining when an order was complete. I eventually solved this with help from ChatGPT.
+I tried to develop the basic gameplay mechanics independently, especially generating falling ingredient words and allowing players to capture them by typing. The most challenging part was connecting captured ingredients to customer orders, checking their categories, updating progress, and recognizing completed orders. I eventually solved this with help from ChatGPT.
 
-I also relied on AI quite a lot for other parts of the project, especially loading images, debugging errors, and connecting different game systems. However, I tried to understand the structure and purpose of the suggested code instead of simply copying it without thinking.
+I relied on AI quite a lot throughout development, particularly for loading images, debugging, and connecting different systems. However, I tried to understand the structure and purpose of the suggested code rather than simply copying it.
 
-My original plan included more features, such as special customers, but I decided to simplify the game to finish it properly. Through this project, I learned how challenging it can be to connect different programming mechanics with visual design, and how important it is to manage the scope of a project.
+As the deadline approached, I had to simplify my original plans and prioritize completing the core gameplay. Given more time, I would design original characters that better reflect the game's world and create more polished starting and ending screens. I would also love to introduce special customers and a "fever" mode to make gameplay more exciting.
 
----
-
+Overall, this project taught me how challenging it is to bring programming, illustration, and game design together into a complete interactive experience.
 <!-- ─────────────────────────────────────────────────────
      GOING FURTHER — want to document more? Try any of these:
 
@@ -80,4 +79,10 @@ My original plan included more features, such as special customers, but I decide
 
      ### 🔗 References
      Tutorials, libraries, artworks, or research that informed your project.
+
+     Vocaloid character designs — Referenced existing Vocaloid character illustrations to create pixel-art character sprites. Original character designs belong to their respective creators.
+
+     ChatGPT — Used for programming assistance, debugging, and understanding JavaScript code.
+
+     Galmuri pixel font — https://github.com/quiple/galmuri
      ───────────────────────────────────────────────────── -->
