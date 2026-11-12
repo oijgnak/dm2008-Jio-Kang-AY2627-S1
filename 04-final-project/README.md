@@ -25,7 +25,7 @@ The player runs a small digital restaurant, responding to customer orders by typ
 <img width="959" height="599" alt="image" src="https://github.com/user-attachments/assets/d61d2f6d-e60e-44b0-bc16-1a9f5d15cbc9" />
 
 
-[Watch Online]([https://your-link-here](https://youtu.be/VAPTgKeSKJ4?si=akYXQ20pv9w4Se6C))
+[Watch Online]([https://your-link-here](https://youtu.be/VAPTgKeSKJ4?si=akYXQ20pv9w4Se6C)
 
 <!-- Replace the link above with a URL to a screen recording or video of your final project.
      ⚠️ Make sure the file or page is set to public before submitting. -->
