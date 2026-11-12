@@ -1,4 +1,4 @@
-# DM2008 — Firstname Lastname
+# DM2008 — Jio Kang
 
 **Course:** DM2008: Programming for Interaction  
 **Academic Year:** AY2526 Semester 2  
