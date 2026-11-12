@@ -145,7 +145,7 @@ let customerServed = false;
 let customerServedAt = 0;
 let customerFailed = false;
 
-let ThankYouMessages = ["Thank you!", "Thanks!", "Yum!", "Delicious!"];
+let ThankYouMessages = ["Thank you!", "Thanks!", "Yum!", "Delicious!", "It's just \nmy type!"];
 
 let gameElapsedSeconds = 0;
 let gameMinutes = 9 * 60;
@@ -522,7 +522,7 @@ function drawTitleScreen() {
   noStroke();
   fill(96, 255, 10);
   textSize(48);
-  text("NOT MY TYPE!", width / 2, 175);
+  text("JUST MY TYPE!", width / 2, 175);
 
   textSize(18);
   text("A TYPING COOKING GAME", width / 2, 235);
