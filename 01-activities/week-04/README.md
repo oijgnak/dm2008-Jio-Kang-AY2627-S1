@@ -32,6 +32,7 @@
 <!-- Drop a screenshot, photo, or GIF of something you made this week.
      Save it to a readme-assets/ folder inside this week's folder.
      Made more than one thing worth showing? Add more images. -->
+<img width="599" height="398" alt="image" src="https://github.com/user-attachments/assets/64b27155-fddd-435d-a8b2-a26a5a59a63f" />
 
 ---
 
