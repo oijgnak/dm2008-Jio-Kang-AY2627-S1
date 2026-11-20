@@ -1,4 +1,4 @@
-# Week ## — Topic Name
+# Week 04 — Object-oriented Programming
 
 <!-- Replace ## with the week number and Topic Name with the week's focus -->
 <!-- You may also refer to each week's slide for the Topic Name -->
@@ -10,8 +10,8 @@
 
 | Activity | What I Made                   |
 | -------- | ----------------------------- |
-| `1a`     | <!-- one line description --> |
-| `1b`     | <!-- one line description --> |
+| `4a`     | randomly choosing cookies in the same class |
+| `4b`     | circles bouncing of walls and changing shapes and colors, making new circle when clicking mouse |
 
 <!-- Add or remove rows to match the activities for this week. -->
 
@@ -21,6 +21,7 @@
 
 <!-- A short, informal summary of what you explored across the week's activities. What did you make? What clicked? What didn't?
      A few sentences is all you need — write it like a journal entry, not a report. -->
+     Understanding classes and properties was very confusing, but asking questions to prof helped me through. activity 4b was very fun to play with.
 
 ---
 
