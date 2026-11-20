@@ -13,8 +13,7 @@
 
 ### This Week
 
-It was interesting to see real-world input directly affect the visuals on screen through Web Serial. Mapping the ultrasonic sensor to both LED brightness and p5.js shapes worked well, and adding smoothing made the movement feel much more natural.
-
+I used an ultrasonic sensor to measure hand distance and mapped those values to adjust the brightness of an LED. It was interesting to see how mapping raw sensor numbers could turn a simple physical movement into a smooth light change.
 
 ---
 
