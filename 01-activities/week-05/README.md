@@ -1,4 +1,4 @@
-# Week ## — Topic Name
+# Week 05 — Object-oriented Programming
 
 <!-- Replace ## with the week number and Topic Name with the week's focus -->
 <!-- You may also refer to each week's slide for the Topic Name -->
@@ -10,8 +10,7 @@
 
 | Activity | What I Made                   |
 | -------- | ----------------------------- |
-| `1a`     | <!-- one line description --> |
-| `1b`     | <!-- one line description --> |
+| `5a`     | circles change color when collideing |
 
 <!-- Add or remove rows to match the activities for this week. -->
 
@@ -21,6 +20,7 @@
 
 <!-- A short, informal summary of what you explored across the week's activities. What did you make? What clicked? What didn't?
      A few sentences is all you need — write it like a journal entry, not a report. -->
+     Was somewhat similar to last weeks activity 4b so there weren't any problems.
 
 ---
 
@@ -31,6 +31,7 @@
 <!-- Drop a screenshot, photo, or GIF of something you made this week.
      Save it to a readme-assets/ folder inside this week's folder.
      Made more than one thing worth showing? Add more images. -->
+<img width="400" height="398" alt="image" src="https://github.com/user-attachments/assets/58aaf030-2912-4ea4-8d5b-f08c92bab645" />
 
 ---
 
