@@ -9,7 +9,8 @@
 <!-- What does your sketch do, and what physical input drives it?
      How does the sensor data translate into something on screen?
      A few sentences is all you need. -->
-     
+
+     I connected the Arduino sensor directly to a p5.js sketch using Web Serial to control a circle and a row of rectangles. Seeing real-world input directly affect the visuals on screen was really interesting, and adding smoothing made the movement feel much more natural.
 
 ---
 
