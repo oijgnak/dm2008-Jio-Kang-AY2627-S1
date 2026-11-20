@@ -20,7 +20,8 @@
 <!-- Drop a screenshot or GIF of your finished project.
      Save it to a readme-assets/ folder inside this project folder.
      Got more than one good screenshot? Add them. -->
-     <img width="637" height="360" alt="image" src="https://github.com/user-attachments/assets/1fc268a4-9c32-4705-a3ae-efd6c118b1d5" />
+     <img width="637" height="360" alt="image" src="https://github.com/user-attachments/assets/cdd16696-d22e-4c47-a6a0-8c42cfa6ed10" />
+
 
 
 [Watch Online](https://your-link-here)
