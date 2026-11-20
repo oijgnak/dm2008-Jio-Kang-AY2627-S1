@@ -10,11 +10,15 @@
      How does the sensor data translate into something on screen?
      A few sentences is all you need. -->
 
+     I connected the Arduino sensor directly to a p5.js sketch using Web Serial to control a circle and a row of rectangles. Seeing real-world input directly affect the visuals on screen was really interesting, and adding smoothing made the movement feel much more natural.
+
 ---
 
 ### Output
 
 ![screenshot](readme-assets/screenshot-01.png)
+<img width="512" height="280" alt="02 오후 6 23 47" src="https://github.com/user-attachments/assets/3393dfb3-0968-45c6-9e7c-69af308752ec" />
+<img width="384" height="210" alt="01 오후 6 23 47" src="https://github.com/user-attachments/assets/5efbb88c-0350-45a9-b6be-05bfe892efd6" />
 
 <!-- Drop a screenshot or GIF of your sketch in action.
      Got a photo of your physical setup too? Throw it in.
