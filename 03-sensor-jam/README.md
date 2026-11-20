@@ -1,4 +1,4 @@
-<img width="1280" height="721" alt="image" src="https://github.com/user-attachments/assets/683ecd13-361f-40b3-bb59-2bdeb6766c08" /># Sensor Jam — Title
+# Sensor Jam — Title
 
 <!-- Replace "Title" with the name of your project, e.g. "Sensor Jam — Theremin Visualiser" -->
 
