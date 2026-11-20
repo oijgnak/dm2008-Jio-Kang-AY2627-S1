@@ -1,4 +1,4 @@
-# Sensor Jam — Title
+<img width="1280" height="721" alt="image" src="https://github.com/user-attachments/assets/683ecd13-361f-40b3-bb59-2bdeb6766c08" /># Sensor Jam — Title
 
 <!-- Replace "Title" with the name of your project, e.g. "Sensor Jam — Theremin Visualiser" -->
 
@@ -9,12 +9,15 @@
 <!-- What does your sketch do, and what physical input drives it?
      How does the sensor data translate into something on screen?
      A few sentences is all you need. -->
+     
 
 ---
 
 ### Output
 
 ![screenshot](readme-assets/screenshot-01.png)
+<img width="512" height="280" alt="02 오후 6 23 47" src="https://github.com/user-attachments/assets/3393dfb3-0968-45c6-9e7c-69af308752ec" />
+<img width="384" height="210" alt="01 오후 6 23 47" src="https://github.com/user-attachments/assets/5efbb88c-0350-45a9-b6be-05bfe892efd6" />
 
 <!-- Drop a screenshot or GIF of your sketch in action.
      Got a photo of your physical setup too? Throw it in.
