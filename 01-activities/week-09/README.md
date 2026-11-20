@@ -23,7 +23,7 @@ It was interesting to see real-world input directly affect the visuals on screen
 ### Output
 
 ![screenshot](readme-assets/output.png)
-<img width="512" height="280" alt="02 오후 6 23 47" src="https://github.com/user-attachments/assets/da2044c8-e40a-47ba-a27a-9feecaee7a57" />
-<img width="384" height="210" alt="01 오후 6 23 47" src="https://github.com/user-attachments/assets/ef7895a7-99c6-4e92-85f1-5a524286c0a4" />
+<img width="1280" height="721" alt="image" src="https://github.com/user-attachments/assets/1e7a5eec-3f98-4893-b6f0-fac0f1c851d0" />
+
 
 ---
